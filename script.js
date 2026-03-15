@@ -1,7 +1,12 @@
 // Инициализация AOS
 AOS.init({
     duration: 800,
-    once: true, // анимация только один раз
+    once: true,
+});
+
+// Маска для телефона
+$(document).ready(function(){
+    $('#phone').mask("+7 (999) 999-99-99");
 });
 
 // --- Элементы калькулятора ---
@@ -57,15 +62,15 @@ function updateResult() {
     `;
 }
 
-debtSlider.addEventListener('input', function () {
+debtSlider.addEventListener('input', function() {
     debtValue.textContent = formatNumber(this.value);
     updateResult();
 });
-incomeSlider.addEventListener('input', function () {
+incomeSlider.addEventListener('input', function() {
     incomeValue.textContent = formatNumber(this.value);
     updateResult();
 });
-propertySlider.addEventListener('input', function () {
+propertySlider.addEventListener('input', function() {
     propertyValue.textContent = formatNumber(this.value);
     updateResult();
 });
@@ -75,11 +80,11 @@ alimonyCheck.addEventListener('change', updateResult);
 
 updateResult();
 
-document.getElementById('consultBtn').addEventListener('click', function () {
+document.getElementById('consultBtn').addEventListener('click', function() {
     document.getElementById('requestSection').scrollIntoView({ behavior: 'smooth' });
 });
 
-// --- Совет дня (массив полезных советов) ---
+// --- Совет дня ---
 const tips = [
     "Перед банкротством не берите новые кредиты — это может усложнить процедуру.",
     "Не дарите и не продавайте имущество родственникам перед банкротством — суд может оспорить сделку.",
@@ -99,14 +104,13 @@ function setRandomTip() {
 }
 setRandomTip();
 
-// --- Валидация формы и отправка через AJAX (PHP) ---
+// --- Валидация формы (без fetch, только проверка перед отправкой) ---
 const form = document.getElementById('requestForm');
 const nameInput = document.getElementById('name');
 const cityInput = document.getElementById('city');
 const phoneInput = document.getElementById('phone');
 const descriptionInput = document.getElementById('description');
 const policyCheck = document.getElementById('policy');
-const formMessage = document.getElementById('formMessage');
 
 function validatePhone(phone) {
     const digits = phone.replace(/\D/g, '');
@@ -181,65 +185,37 @@ cityInput.addEventListener('blur', validateCityField);
 cityInput.addEventListener('input', validateCityField);
 descriptionInput.addEventListener('input', clearDescriptionError);
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
+form.addEventListener('submit', function(e) {
     // Проверяем поля
     const isNameValid = validateNameField();
     const isPhoneValid = validatePhoneField();
     const isCityValid = validateCityField();
     clearDescriptionError();
 
-    // Проверка чекбокса политики
     if (!policyCheck.checked) {
-        alert('Необходимо согласие на обработку персональных данных');
+        e.preventDefault();
+        showToast.warning('Необходимо согласие на обработку персональных данных', {
+            position: 'top-center',
+            duration: 4000
+        });
         return;
     }
 
-    if (isNameValid && isPhoneValid && isCityValid) {
-        // Собираем данные формы
-        const formData = new FormData(form);
-
-        // Отправляем на send.php через fetch
-        fetch('send.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Показываем сообщение об успехе
-                    formMessage.style.display = 'block';
-                    formMessage.textContent = 'Ваше обращение отправлено, ты уже сделал половину пути, у тебя все получится, ожидайте и с вами обязательно свяжется Юр лицо.';
-
-                    // Очищаем поля
-                    nameInput.value = '';
-                    cityInput.value = '';
-                    phoneInput.value = '';
-                    descriptionInput.value = '';
-                    policyCheck.checked = false;
-
-                    // Убираем ошибки
-                    [nameInput, cityInput, phoneInput, descriptionInput].forEach(input => {
-                        input.classList.remove('input-error');
-                    });
-                    document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-
-                    // Скрываем сообщение через 5 секунд
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                    }, 5000);
-                } else {
-                    alert('Ошибка при отправке. Попробуйте позже или свяжитесь по телефону.');
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Ошибка соединения. Попробуйте позже.');
-            });
-    } else {
-        alert('Пожалуйста, исправьте ошибки в форме');
+    if (!(isNameValid && isPhoneValid && isCityValid)) {
+        e.preventDefault();
+        showToast.warning('Пожалуйста, исправьте ошибки в форме', {
+            position: 'top-center',
+            duration: 4000
+        });
+        return;
     }
+
+    // Если всё ок, форма отправится стандартно на Formspree
+    // Показываем тост, что отправка началась (опционально)
+    showToast.success('Отправка...', {
+        position: 'top-center',
+        duration: 2000
+    });
 });
 
 // --- FAQ аккордеон ---
@@ -254,23 +230,4 @@ faqItems.forEach(item => {
         });
         item.classList.toggle('active');
     });
-});
-
-//  маска для телефона //
-phoneInput.addEventListener('input', function (e) {
-    let value = this.value.replace(/\D/g, '');
-    if (value.length > 11) value = value.slice(0, 11);
-    let formatted = '';
-    if (value.length > 0) {
-        if (value[0] === '7' || value[0] === '8') {
-            formatted = '+' + value[0];
-            if (value.length > 1) formatted += ' (' + value.slice(1, 4);
-            if (value.length > 4) formatted += ') ' + value.slice(4, 7);
-            if (value.length > 7) formatted += '-' + value.slice(7, 9);
-            if (value.length > 9) formatted += '-' + value.slice(9, 11);
-        } else {
-            formatted = value;
-        }
-    }
-    this.value = formatted;
 });

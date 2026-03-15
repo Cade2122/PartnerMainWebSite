@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЮрЛицо - списание долгов по 127-ФЗ | Бежецк</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Плавающая кнопка звонка (только на мобильных) -->
     <a href="tel:+79955370688" class="call-button" id="callButton">📞</a>
 
     <header class="header" data-aos="fade-down">
@@ -81,7 +79,6 @@
         </div>
     </section>
 
-    <!-- Блок с советом дня (уникальность) -->
     <section class="tip-section" data-aos="fade-up">
         <div class="container">
             <div class="tip-block">
@@ -116,8 +113,8 @@
             <h2>Оставьте заявку</h2>
             <p>Расскажите о своей ситуации, и мы поможем найти выход</p>
             <div class="request-form">
-                <!-- Форма отправляется через AJAX (см. script.js) -->
-                <form id="requestForm" method="POST">
+                <!-- Formspree endpoint -->
+                <form id="requestForm" action="https://formspree.io/f/xeerlzba" method="POST">
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="ФИО *" required>
                         <div class="error-message" id="nameError"></div>
@@ -135,14 +132,12 @@
                         <div class="error-message" id="descriptionError"></div>
                     </div>
                     
-                    <!-- Чекбокс согласия на обработку данных -->
                     <div class="checkbox-group policy-group">
                         <input type="checkbox" id="policy" required>
                         <label for="policy">Я согласен на <a href="#" target="_blank">обработку персональных данных</a> *</label>
                     </div>
                     
                     <button type="submit" class="btn" id="sendRequest">Отправить</button>
-                    <div id="formMessage" class="form-message"></div>
                 </form>
             </div>
         </div>
@@ -156,8 +151,12 @@
         </div>
     </footer>
 
-    <!-- AOS JS -->
+    <!-- Скрипты -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastjs-notifications@latest/toast-notifications.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastjs-notifications@latest/toast-notifications.css">
     <script src="script.js"></script>
 </body>
 </html>
