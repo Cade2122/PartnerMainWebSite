@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЮрЛицо - списание долгов по 127-ФЗ | Бежецк</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Плавающая кнопка звонка (только на мобильных) -->
+    <a href="tel:+79955370688" class="call-button" id="callButton">📞</a>
+
+    <header class="header" data-aos="fade-down">
+        <div class="container">
+            <div class="logo">ЮрЛицо</div>
+            <div class="contact-info">
+                <a href="tel:+79955370688">+7 (995) 537-06-88</a>
+                <a href="mailto:sidorov.wanysha23031997@gmail.com">sidorov.wanysha23031997@gmail.com</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" data-aos="fade-up">Законное списание долгов по 127-ФЗ</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Николай, я помогаю людям в тяжёлых ситуациях. Узнайте свои шансы за 1 минуту</p>
+            
+            <div class="slogan-block" data-aos="zoom-in" data-aos-delay="200">
+                <p class="slogan-question">💸 Долги заебли?</p>
+                <p class="slogan-answer">Но ты не греби! 👍</p>
+            </div>
+            
+            <div class="calculator" data-aos="flip-left" data-aos-delay="300">
+                <div class="calc-group">
+                    <label for="debt">Сумма долга (руб.)</label>
+                    <input type="range" id="debt" min="0" max="3000000" step="10000" value="500000">
+                    <div class="value-display"><span id="debtValue">500 000</span> ₽</div>
+                </div>
+                <div class="calc-group">
+                    <label for="income">Ежемесячный доход (руб.)</label>
+                    <input type="range" id="income" min="0" max="300000" step="5000" value="40000">
+                    <div class="value-display"><span id="incomeValue">40 000</span> ₽</div>
+                </div>
+                <div class="calc-group">
+                    <label for="property">Стоимость имущества (руб.)</label>
+                    <input type="range" id="property" min="0" max="5000000" step="50000" value="500000">
+                    <div class="value-display"><span id="propertyValue">500 000</span> ₽</div>
+                </div>
+                <div class="calc-group">
+                    <label for="creditors">Количество кредиторов</label>
+                    <input type="number" id="creditors" min="1" max="20" value="2">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="overdue" checked>
+                    <label for="overdue">Есть просрочки более 3 месяцев</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="alimony">
+                    <label for="alimony">Есть долги по алиментам/налогам</label>
+                </div>
+                
+                <div class="result" id="result">
+                    <p class="result-text">Заполните данные</p>
+                </div>
+                <button class="btn" id="consultBtn">Получить бесплатную консультацию</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits" data-aos="fade-right">
+        <div class="container">
+            <h2>Почему выбирают нас</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item" data-aos="flip-up" data-aos-delay="100">⚖️ Работаем строго по 127-ФЗ</div>
+                <div class="benefit-item" data-aos="flip-up" data-aos-delay="200">📞 Бесплатная первичная консультация</div>
+                <div class="benefit-item" data-aos="flip-up" data-aos-delay="300">🏆 Сертифицированные партнёры</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок с советом дня (уникальность) -->
+    <section class="tip-section" data-aos="fade-up">
+        <div class="container">
+            <div class="tip-block">
+                <h3>💡 Совет дня</h3>
+                <p id="dailyTip">Загружаю полезный совет...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" data-aos="fade-left">
+        <div class="container">
+            <h2>Частые вопросы</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">Что такое 127-ФЗ?</div>
+                    <div class="faq-answer">Это федеральный закон о банкротстве, позволяющий законно списать долги через суд или МФЦ.</div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">Какие долги не списываются?</div>
+                    <div class="faq-answer">Алименты, возмещение вреда здоровью, текущие платежи.</div>
+                </div>
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">Сколько стоит процедура?</div>
+                    <div class="faq-answer">Стоимость зависит от сложности, но первая консультация всегда бесплатна.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section" id="requestSection" data-aos="zoom-in">
+        <div class="container">
+            <h2>Оставьте заявку</h2>
+            <p>Расскажите о своей ситуации, и мы поможем найти выход</p>
+            <div class="request-form">
+                <!-- Форма отправляется через AJAX (см. script.js) -->
+                <form id="requestForm" method="POST">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="ФИО *" required>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="city" name="city" placeholder="Город">
+                        <div class="error-message" id="cityError"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Номер телефона *" required>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="description" name="description" placeholder="Кратко опишите ситуацию"></textarea>
+                        <div class="error-message" id="descriptionError"></div>
+                    </div>
+                    
+                    <!-- Чекбокс согласия на обработку данных -->
+                    <div class="checkbox-group policy-group">
+                        <input type="checkbox" id="policy" required>
+                        <label for="policy">Я согласен на <a href="#" target="_blank">обработку персональных данных</a> *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="sendRequest">Отправить</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" data-aos="fade-up">
+        <div class="container">
+            <p>© 2026 ЮрЛицо. Все права защищены.</p>
+            <p>Николай — помогаю людям в тяжёлых ситуациях</p>
+            <p><a href="tel:+79955370688">+7 (995) 537-06-88</a> | <a href="mailto:sidorov.wanysha23031997@gmail.com">sidorov.wanysha23031997@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
